@@ -9,5 +9,5 @@ use Illuminate\Support\Collection;
 interface PostRepositoryInterface
 {
    public function all(): Collection;
-   public function findByUser(): Collection;
+   public function findByUser(int $user_id): Collection;
 }

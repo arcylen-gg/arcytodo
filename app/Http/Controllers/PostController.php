@@ -9,11 +9,11 @@ use Session;
 
 class PostController extends Controller
 {
-    private $postRepository;
+    private $post;
 
-    public function __construct(PostRepositoryInterface $postRepository)
+    public function __construct(PostRepositoryInterface $post)
     {
-        $this->postRepository = $postRepository;
+        $this->post = $post;
     }
 
     /**
@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data['_post'] = $this->postRepository->findByUser(Auth::user()->id);
+        $data['_post'] = $this->post->findByUser(Auth::user()->id);
 
         return view('post.list', $data); 
     }
