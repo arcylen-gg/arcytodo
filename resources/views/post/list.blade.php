@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 {!! $post->post !!}
                                 <div class="pull-right">
-                                    <a data-target="#deleteModal" data-toggle="modal" style="cursor: pointer">
+                                    <a class="delete-modal" data-toggle="modal" data-target="#deleteModal" post-id="{{ $post->id }}" style="cursor: pointer">
                                         <i class="fa fa-2x fa-trash" style="color: red" aria-hidden="true"></i> 
                                     </a>
                                 </div>
@@ -42,7 +42,7 @@
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="POST" action="/post/{{ $post['id'] }}">
+            <form method="POST" id="form-delete" action="/post/{{ $post['id'] }}">
                 @csrf
                 @method('DELETE')
                 <div class="modal-content">
