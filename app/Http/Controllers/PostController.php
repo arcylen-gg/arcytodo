@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Auth;
+use Session;
 
 class PostController extends Controller
 {
@@ -38,7 +39,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'post' => 'required',
+        ]);
+
+        $post = new Post;
+        $post->post = $request->post;
+        $post->user_id = Auth::user()->id;
+        $post->save();
+
+        Session::flash('message', 'Posted succesfully!');
+        return redirect('/post');
     }
 
     /**
