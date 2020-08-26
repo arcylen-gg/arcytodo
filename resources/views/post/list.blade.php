@@ -45,7 +45,7 @@
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="POST" id="form-delete" action="/post/{{ $post['id'] }}">
+            <form method="POST" id="form-delete" action="">
                 @csrf
                 @method('DELETE')
                 <div class="modal-content">

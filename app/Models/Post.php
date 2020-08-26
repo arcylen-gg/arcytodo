@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +20,14 @@ class Post extends Model
      */
     protected $fillable = ['post','updated_at'];
 
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function findById()
+    {
+        return $this->hasOne('App\User');
+    }
 
     /**
      * Get the user that owns the post.
