@@ -34,4 +34,32 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         return $this->model->where('user_id',$user_id)->get();
     }
+
+    /**
+     * @return Bool
+     */
+    public function save(int $user_id, array $request): Bool
+    {
+        $this->model->user_id = $user_id;
+        $this->model->post = $request['post'];
+        return $this->model->save($request);
+    }
+
+    /**
+     * @return Bool
+     */
+    public function update(int $id, array $request): Bool
+    {
+        $this->model->find($id);
+        $this->model->post = $request['post'];
+        return $this->model->save($request);
+    }
+
+    /**
+     * @return Int
+     */
+    public function delete(int $id): Int
+    {
+        return $this->model->destroy($id);
+    }
 }

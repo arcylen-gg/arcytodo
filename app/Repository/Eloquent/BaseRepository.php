@@ -41,4 +41,12 @@ class BaseRepository implements EloquentRepositoryInterface
     {
         return $this->model->find($id);
     }
+
+    /**
+    * Get the associated model
+    */
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
 }

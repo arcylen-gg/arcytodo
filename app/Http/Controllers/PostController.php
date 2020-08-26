@@ -7,7 +7,7 @@ use App\Repository\PostRepositoryInterface;
 use Auth;
 use Session;
 
-class PostController extends Controller
+final class PostController extends Controller
 {
     private $post;
 
@@ -50,11 +50,8 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'post' => 'required',
         ]);
-
-        $post = new Post;
-        $post->post = $request->post;
-        $post->user_id = Auth::user()->id;
-        $post->save();
+        
+        $this->post->save(Auth::user()->id, $request->all());
 
         Session::flash('message', 'Posted succesfully!');
         return redirect('/post');
@@ -80,7 +77,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $data['action'] = 'Update';
-        $data['post'] = Post::find($id);
+        $data['post'] = $this->post->find($id);
 
         return view('post.create', $data);
     }
@@ -97,10 +94,8 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'post' => 'required',
         ]);
-        
-        $post = Post::find($id);
-        $post->post = $request->post;
-        $post->save();
+
+        $this->post->update($id, $request->all());
 
         Session::flash('message', 'Updated succesfully!');
         return redirect('/post');
@@ -114,8 +109,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
-        $post->delete();
+        $this->post->delete($id);
 
         Session::flash('message', 'Deleted succesfully!');
         return redirect('/post');
