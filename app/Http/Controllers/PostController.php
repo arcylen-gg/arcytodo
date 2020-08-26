@@ -28,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create'); 
+        $data['action'] = 'Create';
+        return view('post.create', $data); 
     }
 
     /**
@@ -71,7 +72,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['action'] = 'Update';
+        $data['post'] = Post::find($id);
+
+        return view('post.create', $data);
     }
 
     /**
@@ -83,7 +87,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'post' => 'required',
+        ]);
+        
+        $post = Post::find($id);
+        $post->post = $request->post;
+        $post->save();
+
+        Session::flash('message', 'Updated succesfully!');
+        return redirect('/post');
     }
 
     /**
@@ -94,6 +107,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        Session::flash('message', 'Deleted succesfully!');
+        return redirect('/post');
     }
 }

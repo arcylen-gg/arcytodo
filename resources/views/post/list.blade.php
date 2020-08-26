@@ -17,8 +17,17 @@
                         @foreach ($_post as $post)
                             <div class="card-body">
                                 {!! $post->post !!}
-                                <span class="pull-right"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                                <span class="pull-right"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                <div class="pull-right">
+                                    <a data-target="#deleteModal" data-toggle="modal" style="cursor: pointer">
+                                        <i class="fa fa-2x fa-trash" style="color: red" aria-hidden="true"></i> 
+                                    </a>
+                                </div>
+                                <div class="pull-right">&nbsp; | &nbsp;</div>
+                                <div class="pull-right">
+                                    <a href="{{ url('/post/'.$post->id.'/edit') }}">
+                                        <i class="fa fa-2x fa-pencil-square-o" aria-hidden="true"></i> 
+                                    </a>
+                                </div>
                             </div>
                             <hr>
                         @endforeach
@@ -30,5 +39,28 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form method="POST" action="/post/{{ $post['id'] }}">
+                @csrf
+                @method('DELETE')
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title">Delete this post</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <p>Are you sure you want to delete this post?</p>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>   
 @endsection
