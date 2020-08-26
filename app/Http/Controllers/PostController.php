@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Repository\PostRepositoryInterface;
 use Auth;
 use Session;
 
 class PostController extends Controller
 {
+    private $postRepository;
+
+    public function __construct(PostRepositoryInterface $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data['_post'] = Post::where('user_id', Auth::user()->id)->get();
+        $data['_post'] = $this->postRepository->findByUser(Auth::user()->id);
 
         return view('post.list', $data); 
     }
