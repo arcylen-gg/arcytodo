@@ -18,5 +18,5 @@ class Post extends Model
      *
      * @var array
      */
-    protected $fillable = ['post','created_at'];
+    protected $fillable = ['post','updated_at'];
 }

@@ -16,7 +16,7 @@
                     @if (count($_post) > 0)
                         @foreach ($_post as $post)
                             <div class="card-body">
-                                {!! $post->post !!}
+                                <small>{{ $post->updated_at->diffForHumans() }}</small>
                                 <div class="pull-right">
                                     <a class="delete-modal" data-toggle="modal" data-target="#deleteModal" post-id="{{ $post->id }}" style="cursor: pointer">
                                         <i class="fa fa-2x fa-trash" style="color: red" aria-hidden="true"></i> 
@@ -28,6 +28,9 @@
                                         <i class="fa fa-2x fa-pencil-square-o" aria-hidden="true"></i> 
                                     </a>
                                 </div>
+                                <br>
+                                    <p>{!! $post->post !!}</p>
+                                <br>
                             </div>
                             <hr>
                         @endforeach
