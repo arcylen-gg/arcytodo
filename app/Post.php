@@ -19,4 +19,13 @@ class Post extends Model
      * @var array
      */
     protected $fillable = ['post','updated_at'];
+
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function user()
+    {
+        return $this->hasOne('App\User');
+    }
 }
