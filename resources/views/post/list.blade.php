@@ -28,6 +28,12 @@
                                         <i class="fa fa-2x fa-pencil-square-o" aria-hidden="true"></i> 
                                     </a>
                                 </div>
+                                <div class="pull-right">&nbsp; | &nbsp;</div>
+                                <div class="pull-right">
+                                    <a href="{{ url('/post/'.$post->id) }}">
+                                        <i class="fa fa-2x fa-eye" aria-hidden="true"></i> 
+                                    </a>
+                                </div>
                                 <br>
                                     <p>{!! $post->post !!}</p>
                                 <br>
