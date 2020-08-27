@@ -42,7 +42,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         $this->model->user_id = $user_id;
         $this->model->post = $request['post'];
-        return $this->model->save($request);
+        return $this->model->save();
     }
 
     /**
@@ -50,9 +50,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
      */
     public function update(int $id, array $request): Bool
     {
-        $this->model->find($id);
-        $this->model->post = $request['post'];
-        return $this->model->save($request);
+        $update = $this->model->find($id);
+        $update->post = $request['post'];
+        return $update->save();
     }
 
     /**
